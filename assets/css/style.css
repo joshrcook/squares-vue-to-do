@@ -1,0 +1,94 @@
+* {
+  box-sizing: border-box; }
+
+html,
+body,
+#app,
+#app > div {
+  height: 100%; }
+
+.nav__icon {
+  line-height: 20px;
+  vertical-align: top;
+  margin-right: 4px; }
+.nav__title {
+  line-height: 20px;
+  vertical-align: middle; }
+.nav__header .nav__icon {
+  background-color: #ededed;
+  border-radius: 100%;
+  overflow: hidden;
+  height: 25px;
+  width: 25px;
+  text-align: center; }
+.nav > li {
+  padding-left: 6px;
+  padding-right: 6px;
+  border-radius: 3px;
+  margin-bottom: 2px;
+  height: 40px; }
+  .nav > li:hover {
+    background-color: #f5f5f5; }
+  .nav > li.uk-nav-divider {
+    margin-left: -6px;
+    margin-right: -6px;
+    margin-bottom: 5px;
+    height: auto; }
+  .nav > li.uk-active {
+    background-color: #ededed; }
+.nav > li > a.nav__new-item {
+  color: #2465f7; }
+
+.sidebar {
+  width: 270px;
+  overflow-y: scroll;
+  border-right: 1px solid #ededed;
+  padding: 6px; }
+
+.main {
+  background: #f7f7fa;
+  overflow-y: scroll; }
+
+.list {
+  width: 100%; }
+  .list__header {
+    height: 150px;
+    background: linear-gradient(to right bottom, #765ee6, #1c9fff), url("../img/background-1.jpg");
+    background-blend-mode: hard-light;
+    background-size: cover;
+    background-position: center;
+    padding: 16px;
+    color: white; }
+  .list__title {
+    color: white;
+    font-weight: 300;
+    margin: 0; }
+  .list__items {
+    border-bottom: 1px solid #ededed;
+    border-top: 1px solid #ededed;
+    background: white; }
+    .list__items > li {
+      display: -webkit-box;
+      display: -moz-box;
+      display: box;
+      display: -webkit-flex;
+      display: -moz-flex;
+      display: -ms-flexbox;
+      display: flex;
+      -webkit-box-align: center;
+      -moz-box-align: center;
+      box-align: center;
+      -webkit-align-items: center;
+      -moz-align-items: center;
+      -ms-align-items: center;
+      -o-align-items: center;
+      align-items: center;
+      -ms-flex-align: center;
+      height: 50px;
+      padding: 16px; }
+      .list__items > li .uk-icon {
+        margin-right: 15px; }
+    .list__items .list__new-item {
+      color: #2465f7; }
+
+/*# sourceMappingURL=style.css.map */

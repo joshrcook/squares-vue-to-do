@@ -1,0 +1,30 @@
+// Base
+// Color names: http://chir.ag/projects/name-that-color/
+$color-blue-ribbon: #2465f7;
+$color-mercury: #e6e6e6;
+$color-gallery: #ededed;
+$color-athens-gray: #f7f7fa;
+$color-wild-sand: #f5f5f5;
+
+* {
+	box-sizing: border-box;
+}
+
+// Bourbon
+@import '../vendor/bourbon/bourbon';
+
+// Atoms 
+@import 'atoms/base';
+
+// Molecules
+@import 'molecules/nav';
+
+// Organisms
+@import 'organisms/sidebar', 
+		'organisms/main',
+		'organisms/list';
+
+// Templates
+
+// Pages
+

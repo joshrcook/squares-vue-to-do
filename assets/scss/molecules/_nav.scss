@@ -1,0 +1,54 @@
+.nav {
+
+	&__icon {
+		line-height: 20px;
+		vertical-align: top;
+		margin-right: 4px;
+	}
+
+	&__title {
+		line-height: 20px;
+		vertical-align: middle;
+	}
+
+	&__header {
+
+		.nav__icon {
+		    background-color: $color-gallery;
+		    border-radius: 100%;
+		    overflow: hidden;
+		    height: 25px;
+		    width: 25px;
+		    text-align: center;
+		}
+	}
+
+	> li {
+		padding-left: 6px;
+		padding-right: 6px;
+		border-radius: 3px;
+		margin-bottom: 2px;
+		height: 40px;
+
+		&:hover {
+			background-color: $color-wild-sand;
+		}
+
+		&.uk-nav-divider {
+			margin-left: -6px;
+			margin-right: -6px;
+			margin-bottom: 5px;
+			height: auto;
+		}
+
+		&.uk-active {
+			background-color: $color-gallery;
+		}
+
+	}
+
+	> li > a.nav__new-item {
+		color: $color-blue-ribbon;
+	}
+
+}

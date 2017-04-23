@@ -10,27 +10,44 @@
         <link rel="apple-touch-icon" href="apple-touch-icon.png">
         <!-- Place favicon.ico in the root directory -->
 
-        <link rel="stylesheet" href="css/normalize.css">
-        <link rel="stylesheet" href="css/main.css">
-        <script src="js/vendor/modernizr-2.8.3.min.js"></script>
+        <link rel="stylesheet" href="assets/vendor/uikit-3.0.0-beta.21/css/uikit.min.css">
+        <link rel="stylesheet" href="assets/css/style.css">
+        <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
-        <!--[if lte IE 9]>
-            <p class="browserupgrade">You are using an <strong>outdated</strong> browser. Please <a href="http://browsehappy.com/">upgrade your browser</a> to improve your experience and security.</p>
-        <![endif]-->
+        
+        <div id="app">
+            <div class="uk-flex">
+                <aside class="sidebar">
+                    <ul class="nav  uk-nav uk-nav-default">
+                        <li class="nav__header  uk-nav-header  uk-flex uk-flex-middle"><span class="nav__icon" uk-icon="icon:user"></span> <span class="nav__header-title">Joshua Cook</span></li>
+                        <li class="uk-nav-divider"></li>
+                        <li class="uk-active  uk-flex uk-flex-middle">
+                            <a href="#"><span class="nav__icon" uk-icon="icon:check"></span> <span class="nav__title">To-Do</span></a>
+                        </li>
+                        <li class="uk-flex uk-flex-middle">
+                            <a href="#" class="nav__new-item"><span class="nav__icon" uk-icon="icon:plus"></span> <span class="nav__title">New List</span></a>
+                        </li>
+                    </ul>
+                </aside>
+                <main class="main uk-flex uk-flex-1">
+                    <div class="list uk-flex uk-flex-column">
+                        <header class="list__header uk-flex uk-flex-bottom">
+                            <h2 class="list__title">To-Do</h2>
+                        </header>
+                        <div class="list__body uk-flex-1">
+                            <ul class="list__items  uk-list uk-list-divider">
+                                <li class="list__new-item"><span uk-icon="icon:plus"></span> Add a to-do</li>
+                            </ul>
+                        </div>
+                    </div>
+                </main>
+            </div>
+        </div>
 
-        <!-- Add your site or application content here -->
-        <p>Hello world! This is HTML5 Boilerplate.</p>
-        <script src="https://code.jquery.com/jquery-3.2.0.min.js" integrity="sha256-JAW99MJVpJBGcbzEuXk4Az05s/XyDdBomFqNlM3ic+I=" crossorigin="anonymous"></script>
-        <script>window.jQuery || document.write('<script src="js/vendor/jquery-3.2.0.min.js"><\/script>')</script>
-        <script src="js/plugins.js"></script>
-        <script src="js/main.js"></script>
-
-        <!-- Google Analytics: change UA-XXXXX-Y to be your site's ID. -->
-        <script>
-            window.ga=function(){ga.q.push(arguments)};ga.q=[];ga.l=+new Date;
-            ga('create','UA-XXXXX-Y','auto');ga('send','pageview')
-        </script>
-        <script src="https://www.google-analytics.com/analytics.js" async defer></script>
+        <script src="assets/js/vendor/jquery-3.2.0.min.js"></script>
+        <script src="assets/vendor/uikit-3.0.0-beta.21/js/uikit.js"></script>
+        <script src="assets/vendor/uikit-3.0.0-beta.21/js/uikit-icons.js"></script>
+        <script src="assets/js/main.js"></script>
     </body>
 </html>

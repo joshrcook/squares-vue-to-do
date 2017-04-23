@@ -1,0 +1,42 @@
+.list {
+	width: 100%;
+
+	&__header {
+		height: 150px;
+		background: linear-gradient(to right bottom, rgb(118, 94, 230), rgb(28, 159, 255)), url('../img/background-1.jpg');
+		background-blend-mode: hard-light;
+		background-size: cover;
+		background-position: center;
+		padding: 16px;
+		color: white;
+	}
+
+	&__title {
+		color: white;
+		font-weight: 300;
+		margin: 0;
+	}
+
+	&__items {
+		border-bottom: 1px solid $color-gallery;
+		border-top: 1px solid $color-gallery;
+		background: white;
+
+		> li {
+			@include display( flex );
+			@include align-items( center );
+			height: 50px;
+			padding: 16px;
+
+			.uk-icon {
+				margin-right: 15px;
+			}
+		}
+
+		.list__new-item {
+			color: $color-blue-ribbon;
+		}
+
+	}
+
+}
