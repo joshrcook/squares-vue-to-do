@@ -17,6 +17,10 @@
 		margin: 0;
 	}
 
+	&__body {
+		position: relative;
+	}
+
 	&__items {
 		border-bottom: 1px solid $color-gallery;
 		border-top: 1px solid $color-gallery;
@@ -37,6 +41,13 @@
 			color: $color-blue-ribbon;
 		}
 
+	}
+
+	&__placeholder {
+		position: absolute;
+		left: 50%;
+		top: 50%;
+		@include transform( translate3d( -50%, -50%, 0 ) );
 	}
 
 }
