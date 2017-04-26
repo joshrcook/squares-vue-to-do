@@ -12,7 +12,30 @@
 
         <link rel="stylesheet" href="assets/vendor/uikit-3.0.0-beta.21/css/uikit.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
-        <script src="assets/vendor/modernizr/modernizr-2.8.3.min.js"></script>
+        <style>
+            .list__icon {
+                display: inline-block;
+                height: 20px;
+                width: 20px;
+                border: 1px solid;
+                border-radius: 100%;
+                margin-right: 15px;
+            }
+
+            .list__icon .uk-icon {
+                position: relative;
+                top: -5px;
+            }
+
+            .uk-list-divider>li:nth-child(n+2) {
+                margin-top: 0;
+            }
+
+            .is-completed .todo__title {
+                text-decoration: line-through;
+            }
+        </style>
+        <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
         
@@ -22,35 +45,68 @@
                     <ul class="nav  uk-nav uk-nav-default">
                         <li class="nav__header  uk-nav-header  uk-flex uk-flex-middle"><span class="nav__icon" uk-icon="icon:user"></span> <span class="nav__header-title">Joshua Cook</span></li>
                         <li class="uk-nav-divider"></li>
-                        <li class="uk-flex uk-flex-middle" v-for="( list, listIndex ) in lists" v-bind:class="{ 'uk-active': list.isActive }" v-on:click="activateList( listIndex )">
-                            <a href="#" class="uk-width-1-1">
-                                <span class="nav__icon" uk-icon="icon:check"></span> 
-                                <span class="nav__title" v-text="list.title"></span>
-                                <span class="uk-badge  uk-float-right" v-text="list.todos.length" v-if="list.todos.length"></span>
-                            </a>
+                        <li class="uk-flex uk-flex-middle" 
+                            v-for="( list, listIndex ) in lists" 
+                            v-bind:class="{ 'uk-active': list.isActive }" 
+                            v-on:click.prevent="setActiveList( listIndex )">
+                            <a href="#"><span class="nav__icon" uk-icon="icon:check"></span> <span class="nav__title" v-text="list.title">To-Do</span></a>
                         </li>
-                        <li class="uk-flex uk-flex-middle" v-on:click="addList">
+                        <li class="uk-flex uk-flex-middle" v-on:click.prevent="addNewList">
                             <a href="#" class="nav__new-item"><span class="nav__icon" uk-icon="icon:plus"></span> <span class="nav__title">New List</span></a>
                         </li>
                     </ul>
                 </aside>
                 <main class="main uk-flex uk-flex-1">
-                    <div class="list uk-flex uk-flex-column" v-for="list in activeLists">
-                        <header class="list__header uk-flex uk-flex-bottom">
-                            <h2 class="list__title" v-text="list.title">To-Do</h2>
+                    <div class="list uk-flex uk-flex-column" v-for="( list, listIndex ) in lists" v-if="list.isActive">
+                        <header class="list__header uk-flex uk-flex-bottom uk-flex-between">
+                            <h2 class="list__title" v-text="list.title" v-if="!list.isEditing" v-on:click="list.isEditing = true;">To-Do</h2>
+                            <input type="text" v-model.lazy="list.title" v-on:blur="list.isEditing = false;" v-else>
+                            <div class="list__actions">
+                                <button class="uk-button uk-button-default"><span uk-icon="icon:list"></span> Sort</button>
+                                <div uk-dropdown="mode:click">
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        <li><a href="#">Alphabetically</a></li>
+                                        <li><a href="#">Completed</a></li>
+                                    </ul>
+                                </div>
+                                <button class="uk-button uk-button-default"><span uk-icon="icon:more"></span></button>
+                                <div uk-dropdown="mode:click">
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        <li><a href="#" v-on:click.prevent="list.isEditing = true;">Rename List</a></li>
+                                        <li><a href="#">Hide Completed Todos</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="#" v-on:click.prevent="deleteList( listIndex )">Delete List</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </header>
                         <div class="list__body uk-flex-1">
                             <ul class="list__items  uk-list uk-list-divider">
-                                <li class="list__new-item"><span uk-icon="icon:plus"></span> Add a to-do</a></li>
+                                <li 
+                                    v-for="todo in list.todos" 
+                                    v-bind:class="{ 'is-completed': todo.isCompleted }">
+                                    <span class="list__icon" v-on:click="todo.isCompleted = !todo.isCompleted">
+                                        <span uk-icon="icon:check" v-if="todo.isCompleted"></span>
+                                    </span> 
+                                    <span class="todo__title" 
+                                        v-text="todo.title" 
+                                        v-if="!todo.isEditing" 
+                                        v-on:click="todo.isEditing = true;">Todo 1</span>
+                                    <input type="text" class="uk-input" 
+                                        v-model="todo.title" 
+                                        v-else
+                                        v-on:blur="todo.isEditing = false;">
+                                    </li>
+                                <li class="list__new-item" v-on:click="addNewTodo"><span uk-icon="icon:plus"></span> Add a to-do</li>
                             </ul>
-                            <span class="list__placeholder  uk-text uk-text-muted">Your list is empty. Add a to-do.</span>
+                            <span class="list__placeholder  uk-text uk-text-muted" v-if="list.todos.length == 0">Your list is empty. Add a to-do.</span>
                         </div>
                     </div>
                 </main>
             </div>
         </div>
 
-        <script src="assets/vendor/jquery/jquery-3.2.0.min.js"></script>
+        <script src="assets/js/vendor/jquery-3.2.0.min.js"></script>
         <script src="assets/vendor/uikit-3.0.0-beta.21/js/uikit.js"></script>
         <script src="assets/vendor/uikit-3.0.0-beta.21/js/uikit-icons.js"></script>
         <script src="assets/vendor/vue.js"></script>
