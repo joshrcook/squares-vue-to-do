@@ -12,7 +12,7 @@
 
         <link rel="stylesheet" href="assets/vendor/uikit-3.0.0-beta.21/css/uikit.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
-        <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
+        <script src="assets/vendor/modernizr/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
         
@@ -22,22 +22,26 @@
                     <ul class="nav  uk-nav uk-nav-default">
                         <li class="nav__header  uk-nav-header  uk-flex uk-flex-middle"><span class="nav__icon" uk-icon="icon:user"></span> <span class="nav__header-title">Joshua Cook</span></li>
                         <li class="uk-nav-divider"></li>
-                        <li class="uk-active  uk-flex uk-flex-middle">
-                            <a href="#"><span class="nav__icon" uk-icon="icon:check"></span> <span class="nav__title">To-Do</span></a>
+                        <li class="uk-flex uk-flex-middle" v-for="( list, listIndex ) in lists" v-bind:class="{ 'uk-active': list.isActive }" v-on:click="activateList( listIndex )">
+                            <a href="#" class="uk-width-1-1">
+                                <span class="nav__icon" uk-icon="icon:check"></span> 
+                                <span class="nav__title" v-text="list.title"></span>
+                                <span class="uk-badge  uk-float-right" v-text="list.todos.length" v-if="list.todos.length"></span>
+                            </a>
                         </li>
-                        <li class="uk-flex uk-flex-middle">
+                        <li class="uk-flex uk-flex-middle" v-on:click="addList">
                             <a href="#" class="nav__new-item"><span class="nav__icon" uk-icon="icon:plus"></span> <span class="nav__title">New List</span></a>
                         </li>
                     </ul>
                 </aside>
                 <main class="main uk-flex uk-flex-1">
-                    <div class="list uk-flex uk-flex-column">
+                    <div class="list uk-flex uk-flex-column" v-for="list in activeLists">
                         <header class="list__header uk-flex uk-flex-bottom">
-                            <h2 class="list__title">To-Do</h2>
+                            <h2 class="list__title" v-text="list.title">To-Do</h2>
                         </header>
                         <div class="list__body uk-flex-1">
                             <ul class="list__items  uk-list uk-list-divider">
-                                <li class="list__new-item"><span uk-icon="icon:plus"></span> Add a to-do</li>
+                                <li class="list__new-item"><span uk-icon="icon:plus"></span> Add a to-do</a></li>
                             </ul>
                             <span class="list__placeholder  uk-text uk-text-muted">Your list is empty. Add a to-do.</span>
                         </div>
@@ -46,9 +50,10 @@
             </div>
         </div>
 
-        <script src="assets/js/vendor/jquery-3.2.0.min.js"></script>
+        <script src="assets/vendor/jquery/jquery-3.2.0.min.js"></script>
         <script src="assets/vendor/uikit-3.0.0-beta.21/js/uikit.js"></script>
         <script src="assets/vendor/uikit-3.0.0-beta.21/js/uikit-icons.js"></script>
+        <script src="assets/vendor/vue.js"></script>
         <script src="assets/js/main.js"></script>
     </body>
 </html>
