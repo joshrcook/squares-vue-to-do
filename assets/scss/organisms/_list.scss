@@ -50,4 +50,18 @@
 		@include transform( translate3d( -50%, -50%, 0 ) );
 	}
 
+	&__actions {
+
+		.uk-button {
+		    padding: 9px 12px;
+		    line-height: 20px;
+		    color: white;
+		    text-transform: none;
+		    border-radius: 3px;
+		    border: none;
+		    background: rgb(13, 109, 226);
+		}
+		
+	}
+
 }

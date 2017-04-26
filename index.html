@@ -32,8 +32,26 @@
                 </aside>
                 <main class="main uk-flex uk-flex-1">
                     <div class="list uk-flex uk-flex-column">
-                        <header class="list__header uk-flex uk-flex-bottom">
+                        <header class="list__header uk-flex uk-flex-bottom uk-flex-between">
                             <h2 class="list__title">To-Do</h2>
+                            <div class="list__actions">
+                                <button class="uk-button uk-button-default"><span uk-icon="icon:list"></span> Sort</button>
+                                <div uk-dropdown="mode:click">
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        <li><a href="#">Alphabetically</a></li>
+                                        <li><a href="#">Completed</a></li>
+                                    </ul>
+                                </div>
+                                <button class="uk-button uk-button-default"><span uk-icon="icon:more"></span></button>
+                                <div uk-dropdown="mode:click">
+                                    <ul class="uk-nav uk-dropdown-nav">
+                                        <li><a href="#">Rename List</a></li>
+                                        <li><a href="#">Hide Completed Todos</a></li>
+                                        <li class="uk-nav-divider"></li>
+                                        <li><a href="#">Delete List</a></li>
+                                    </ul>
+                                </div>
+                            </div>
                         </header>
                         <div class="list__body uk-flex-1">
                             <ul class="list__items  uk-list uk-list-divider">
