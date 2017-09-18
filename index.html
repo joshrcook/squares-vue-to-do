@@ -12,6 +12,11 @@
 
         <link rel="stylesheet" href="assets/vendor/uikit-3.0.0-beta.21/css/uikit.min.css">
         <link rel="stylesheet" href="assets/css/style.css">
+        <style>
+            .strike {
+                text-decoration: line-through;
+            }
+        </style>
         <script src="assets/js/vendor/modernizr-2.8.3.min.js"></script>
     </head>
     <body>
@@ -22,8 +27,8 @@
                     <ul class="nav  uk-nav uk-nav-default">
                         <li class="nav__header  uk-nav-header  uk-flex uk-flex-middle"><span class="nav__icon" uk-icon="icon:user"></span> <span class="nav__header-title">Joshua Cook</span></li>
                         <li class="uk-nav-divider"></li>
-                        <li class="uk-active  uk-flex uk-flex-middle" v-for="list in lists">
-                            <a href="#"><span class="nav__icon" uk-icon="icon:check"></span> <span class="nav__title">{{ list.title }}</span></a>
+                        <li class="uk-active  uk-flex uk-flex-middle" v-for="( list, listIndex ) in lists">
+                            <a href="#" v-on:click="showList( listIndex )"><span class="nav__icon" uk-icon="icon:check"></span> <span class="nav__title">{{ list.title }}</span></a>
                         </li>
                         <li class="uk-flex uk-flex-middle">
                             <a href="#" class="nav__new-item" v-on:click.prevent="createNewList">
@@ -32,10 +37,10 @@
                         </li>
                     </ul>
                 </aside>
-                <main class="main uk-flex uk-flex-1">
+                <main class="main uk-flex uk-flex-1" v-for="list in activeLists">
                     <div class="list uk-flex uk-flex-column">
                         <header class="list__header uk-flex uk-flex-bottom uk-flex-between">
-                            <h2 class="list__title">To-Do</h2>
+                            <h2 class="list__title">{{ list.title }}</h2>
                             <div class="list__actions">
                                 <button class="uk-button uk-button-default"><span uk-icon="icon:list"></span> Sort</button>
                                 <div uk-dropdown="mode:click">
@@ -57,16 +62,16 @@
                         </header>
                         <div class="list__body uk-flex-1">
                             <ul class="list__items  uk-list uk-list-divider">
-                                <li>
+                                <li v-for="todo in list.todos">
                                     <span class="list__icon">
-                                        <span uk-icon="icon:check"></span>
+                                        <span uk-icon="icon:circle"></span>
                                     </span> 
-                                    <span class="todo__title">Todo 1</span>
-                                    <input type="text" class="uk-input">
+                                    <span class="todo__title" v-bind:class="{ 'strike': todo.isCompleted }" 
+                                        v-on:click="todo.isCompleted = !todo.isCompleted">{{ todo.text }}</span>
                                 </li>
-                                <li class="list__new-item"><span uk-icon="icon:plus"></span> Add a to-do</li>
+                                <li class="list__new-item" v-on:click="addATodo"><span uk-icon="icon:plus"></span> Add a to-do</li>
                             </ul>
-                            <span class="list__placeholder  uk-text uk-text-muted">Your list is empty. Add a to-do.</span>
+                            <span class="list__placeholder  uk-text uk-text-muted" v-if="list.todos.length === 0">Your list is empty. Add a to-do.</span>
                         </div>
                     </div>
                 </main>
@@ -83,21 +88,58 @@
                 data: {
                     lists: [
                         {
-                            title: 'A new list'
+                            title: 'A new list',
+                            isActive: true,
                             todos: [
                                 {
                                     text: 'A new todo',
+                                    isCompleted: true
+                                }
+                            ]
+                        }, 
+                        {
+                            title: 'A new title',
+                            isActive: false,
+                            todos: [
+                                {
+                                    text: 'something',
                                     isCompleted: false
                                 }
                             ]
                         }
                     ]
-                }, 
+                },
+                computed: {
+                    activeLists: function() {
+                        return this.lists.filter( function( list ) {
+                            return list.isActive === true;
+                        });
+                    }
+                },
                 methods: {
                     createNewList: function() {
                         this.lists.push( {
-                            title: 'Unnamed list'
+                            title: 'Unnamed list', 
+                            isActive: false, 
+                            todos: []
                         } );
+
+                        this.showList( this.lists.length - 1 );
+                    }, 
+                    showList: function( listIndex ) {
+                        this.lists.forEach( function( list, index ) {
+                            if( listIndex === index ) {
+                                list.isActive = true;
+                            } else {
+                                list.isActive = false;
+                            }
+                        });
+                    }, 
+                    addATodo: function() {
+                        this.activeLists[0].todos.push( {
+                            text: 'New Todo', 
+                            isCompleted: false
+                        });
                     }
                 }
             })
